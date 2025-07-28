@@ -42,7 +42,7 @@ The repository is structured to accommodate multiple verticals, each containing 
 - Enabled data-driven decisions with centralized access via Metabase.
 
 ## Future Improvements
-- Add support for additional verticals (e.g., CallCenter, Marketplace, Finance).
+- Add support for additional verticals (e.g., CallCenter, PostPublish).
 - Enhance documentation with detailed API or database integration guides.
 - Automate project setup with reusable templates.
 - Integrate real-time data processing capabilities.
