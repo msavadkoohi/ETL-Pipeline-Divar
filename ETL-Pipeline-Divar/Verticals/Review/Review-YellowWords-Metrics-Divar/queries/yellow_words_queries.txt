@@ -1,0 +1,22 @@
+-- Query to get yellow words metrics
+SELECT
+    DATE(post_created_at) AS date,
+    post_content AS yellow_word,
+    'default_queue' AS queue,
+    category AS dest_category,
+    reject_reason_id,
+    COUNT(*) AS total_count,
+    SUM(CASE WHEN post_content LIKE '%yellow%' THEN 1 ELSE 0 END) AS used_solo,
+    AVG(CASE WHEN post_content LIKE '%yellow%' THEN 1.0 ELSE 0.0 END) AS used_set,
+    SUM(CASE WHEN status = 'accepted' THEN 1 ELSE 0 END) AS accepted,
+    SUM(CASE WHEN status = 'accepted' AND post_content LIKE '%yellow%' THEN 1 ELSE 0 END) AS accepted_solo,
+    AVG(CASE WHEN status = 'accepted' AND post_content LIKE '%yellow%' THEN 1.0 ELSE 0.0 END) AS accepted_set,
+    SUM(CASE WHEN status = 'rejected' AND related = 1 THEN 1 ELSE 0 END) AS related_rejected,
+    SUM(CASE WHEN status = 'rejected' AND related = 1 AND post_content LIKE '%yellow%' THEN 1 ELSE 0 END) AS related_rejected_solo,
+    AVG(CASE WHEN status = 'rejected' AND related = 1 AND post_content LIKE '%yellow%' THEN 1.0 ELSE 0.0 END) AS related_rejected_set,
+    SUM(CASE WHEN status = 'rejected' AND related = 0 THEN 1 ELSE 0 END) AS not_related_rejected,
+    SUM(CASE WHEN status = 'rejected' AND related = 0 AND post_content LIKE '%yellow%' THEN 1 ELSE 0 END) AS not_related_rejected_solo,
+    AVG(CASE WHEN status = 'rejected' AND related = 0 AND post_content LIKE '%yellow%' THEN 1.0 ELSE 0.0 END) AS not_related_rejected_set
+FROM ads_table
+WHERE post_created_at BETWEEN '{start_date}' AND '{end_date}'
+GROUP BY DATE(post_created_at), post_content, category, reject_reason_id;

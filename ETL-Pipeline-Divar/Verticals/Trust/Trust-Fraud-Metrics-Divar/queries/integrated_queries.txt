@@ -1,0 +1,51 @@
+-- Query for get_fraud_reports (fraud reports data)
+SELECT phone, token, cat1, report_date
+FROM fraud_reports_table
+WHERE report_date BETWEEN '{start_date}' AND '{end_date}';
+
+-- Query for get_demand_side_crm_fraud_reporters (CRM fraud reporters)
+SELECT phone, report_date
+FROM crm_fraud_reporters_table
+WHERE report_date BETWEEN '{start_date}' AND '{end_date}'
+AND occurrence = 1;
+
+-- Query for fraud_blacklist_tokens (blacklisted tokens)
+SELECT token, is_fraud
+FROM blacklist_tokens_table
+WHERE updated_at BETWEEN '{start_date}' AND '{end_date}';
+
+-- Query for maaleh.read.action_log.clean_click_post (active users - click post)
+SELECT phone_number AS phone
+FROM action_log_click_post
+WHERE created_at BETWEEN '{start_date}' AND '{end_date}'
+AND phone_number IS NOT NULL;
+
+-- Query for maaleh.read.action_log.clean_load_post_page (active users - load post page)
+SELECT phone_number AS phone
+FROM action_log_load_post_page
+WHERE created_at BETWEEN '{start_date}' AND '{end_date}'
+AND phone_number IS NOT NULL;
+
+-- Query for maaleh.read.action_log.clean_click_contact (interactions - click contact)
+SELECT phone_number AS phone, post_token AS token, post__cat1_slug AS cat1
+FROM action_log_click_contact
+WHERE created_at BETWEEN '{start_date}' AND '{end_date}'
+AND phone_number IS NOT NULL;
+
+-- Query for maaleh.read.action_log.clean_select_contact_method (interactions - select contact)
+SELECT phone_number AS phone, post_token AS token, post__cat1_slug AS cat1
+FROM action_log_select_contact_method
+WHERE created_at BETWEEN '{start_date}' AND '{end_date}'
+AND phone_number IS NOT NULL;
+
+-- Query for bil.read.dumps.live_chat.blocks (chat blockers)
+SELECT blocker_id AS user_id, blocker_conversation_id
+FROM live_chat_blocks
+WHERE inserted_at BETWEEN '{start_date}' AND '{end_date}'
+AND blocking_reason = 7
+AND LENGTH(blocker_conversation_id) = 36;
+
+-- Query for bil.read.dumps.live_chat.users_by_phone (chat blockers - users by phone)
+SELECT phone, id AS user_id
+FROM live_chat_users_by_phone
+WHERE updated_at = 'today';

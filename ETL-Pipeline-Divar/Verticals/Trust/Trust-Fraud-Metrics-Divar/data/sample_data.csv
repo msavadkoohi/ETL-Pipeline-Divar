@@ -1,0 +1,4 @@
+phone,token,cat1,report_date,score,type
+09123456789,token1,cat1,2023-01-01,1,not_exposed
+09123456780,token2,cat2,2023-01-02,2,interacted_with_reported_tokens
+09123456781,token3,cat3,2023-01-03,3,interacted_with_blacklisted_tokens

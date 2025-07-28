@@ -1,0 +1,3 @@
+SELECT phone, blacklisted_at, side_effect_type, note
+FROM blacklist_table
+WHERE blacklisted_at BETWEEN '{start_date}' AND '{end_date}'
