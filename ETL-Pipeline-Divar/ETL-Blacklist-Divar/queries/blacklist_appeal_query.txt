@@ -1,0 +1,3 @@
+SELECT appellant_id, appealled_at, judged_at, result
+FROM blacklist_appeal_table
+WHERE appealled_at BETWEEN '{first_date}' AND '{second_date}'

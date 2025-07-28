@@ -1,0 +1,2 @@
+SELECT judgement_reason_id, description, title
+FROM judgement_reason_table

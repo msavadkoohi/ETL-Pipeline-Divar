@@ -1,0 +1,3 @@
+SELECT phone, judged_at, judgement_reason_id, inspector
+FROM judgements_table
+WHERE judged_at BETWEEN '{first_date}' AND '{second_date}'
